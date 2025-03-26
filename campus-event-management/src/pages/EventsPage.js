@@ -3,7 +3,7 @@ import EventList from '../components/EventList';
 
 const EventsPage = () => {
     return (
-        <div>
+        <div className="container">
             <h1>Events</h1>
             <EventList />
         </div>
