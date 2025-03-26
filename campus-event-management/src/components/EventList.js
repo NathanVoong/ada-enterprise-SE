@@ -4,15 +4,21 @@ import { supabase } from '../utils/supabaseClient';
 const EventList = () => {
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const { data, error } = await supabase
-                .from('events')
-                .select('*');
-            if (error) console.error(error);
-            else setEvents(data);
-            setLoading(false);
+            try {
+                const { data, error } = await supabase
+                    .from('events')
+                    .select('*');
+                if (error) throw error;
+                setEvents(data);
+            } catch (error) {
+                setError(error.message);
+            } finally {
+                setLoading(false);
+            }
         };
         fetchEvents();
     }, []);
@@ -23,6 +29,7 @@ const EventList = () => {
 
     return (
         <div>
+            {error && <div className="error">{error}</div>}
             <h2>Upcoming Events</h2>
             <ul>
                 {events.map(event => (

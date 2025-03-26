@@ -66,19 +66,8 @@ h1, h2, h3 {
   color: #333;
 }
 
-/* Status message styles */
-#status {
-  margin: 20px 0;
-  padding: 10px;
-  background-color: #ffeb3b;
-  border-radius: 5px;
-  text-align: center;
-}
-
-/* Message styles */
-.message {
-  margin: 10px 0;
-  padding: 10px;
-  background-color: #e0f7fa;
-  border-radius: 5px;
+/* Error message styles */
+.error {
+  color: red;
+  margin-bottom: 10px;
 }
