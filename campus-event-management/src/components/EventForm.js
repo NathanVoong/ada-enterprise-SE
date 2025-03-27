@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { supabase } from '../utils/supabaseClient';
+import axios from 'axios';
 
 const EventForm = () => {
     const [event, setEvent] = useState({ name: '', date: '', description: '' });
@@ -13,13 +13,10 @@ const EventForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const { data, error } = await supabase
-                .from('events')
-                .insert([{ name: event.name, date: event.date, description: event.description }]);
-            if (error) throw error;
-            console.log(data);
+            const response = await axios.post('http://localhost:5000/api/events', event);
+            console.log(response.data);
         } catch (error) {
-            setError(error.message);
+            setError(error.response ? error.response.data.message : 'Network Error');
         }
     };
 
