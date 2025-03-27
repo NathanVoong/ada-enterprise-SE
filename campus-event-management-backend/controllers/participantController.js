@@ -1,14 +1,10 @@
-import { supabase } from '../utils/supabaseClient.js';
+const Participant = require('../models/Participant');
 
-export const registerParticipant = async (req, res, next) => {
-    const { name, email } = req.body;
+exports.registerParticipant = async (req, res) => {
     try {
-        const { data, error } = await supabase
-            .from('participants')
-            .insert([{ name, email }]);
-        if (error) throw error;
-        res.status(201).json(data);
+        const participant = await Participant.create(req.body);
+        res.status(201).json(participant);
     } catch (error) {
-        next(error);
+        res.status(500).json({ message: error.message });
     }
 };
