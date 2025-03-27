@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { supabase } from '../utils/supabaseClient';
+import axios from 'axios';
 
 const LoginForm = () => {
     const [credentials, setCredentials] = useState({ email: '', password: '' });
@@ -13,14 +13,10 @@ const LoginForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const { user, error } = await supabase.auth.signIn({
-                email: credentials.email,
-                password: credentials.password,
-            });
-            if (error) throw error;
-            console.log(user);
+            const response = await axios.post('http://localhost:5000/api/auth/signin', credentials);
+            console.log(response.data);
         } catch (error) {
-            setError(error.message);
+            setError(error.response ? error.response.data.message : 'Network Error');
         }
     };
 

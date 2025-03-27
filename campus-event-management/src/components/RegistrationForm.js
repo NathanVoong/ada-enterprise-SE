@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { supabase } from '../utils/supabaseClient';
+import axios from 'axios';
 
-const RegistrationForm = () => {
+const RegisterForm = () => {
     const [participant, setParticipant] = useState({ name: '', email: '' });
     const [error, setError] = useState(null);
 
@@ -13,13 +13,10 @@ const RegistrationForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const { data, error } = await supabase
-                .from('participants')
-                .insert([{ name: participant.name, email: participant.email }]);
-            if (error) throw error;
-            console.log(data);
+            const response = await axios.post('http://localhost:5000/api/participants', participant);
+            console.log(response.data);
         } catch (error) {
-            setError(error.message);
+            setError(error.response ? error.response.data.message : 'Network Error');
         }
     };
 
@@ -27,12 +24,12 @@ const RegistrationForm = () => {
         <div>
             {error && <div className="error">{error}</div>}
             <form onSubmit={handleSubmit}>
-                <input type="text" name="name" value={participant.name} onChange={handleChange} placeholder="Your Name" required />
-                <input type="email" name="email" value={participant.email} onChange={handleChange} placeholder="Your Email" required />
+                <input type="text" name="name" value={participant.name} onChange={handleChange} placeholder="Name" required />
+                <input type="email" name="email" value={participant.email} onChange={handleChange} placeholder="Email" required />
                 <button type="submit">Register</button>
             </form>
         </div>
     );
 };
 
-export default RegistrationForm;
+export default RegisterForm;

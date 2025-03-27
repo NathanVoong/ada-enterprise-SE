@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { supabase } from '../utils/supabaseClient';
+import axios from 'axios';
 
 const EventList = () => {
     const [events, setEvents] = useState([]);
@@ -9,13 +9,14 @@ const EventList = () => {
     useEffect(() => {
         const fetchEvents = async () => {
             try {
-                const { data, error } = await supabase
-                    .from('events')
-                    .select('*');
-                if (error) throw error;
-                setEvents(data);
+                const response = await axios.get('http://localhost:5000/api/events');
+                if (response.data.length === 0) {
+                    setError('No events found');
+                } else {
+                    setEvents(response.data);
+                }
             } catch (error) {
-                setError(error.message);
+                setError(error.response ? error.response.data.message : 'Network Error');
             } finally {
                 setLoading(false);
             }
