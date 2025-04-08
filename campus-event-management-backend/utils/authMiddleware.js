@@ -1,0 +1,20 @@
+const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+
+dotenv.config();
+
+// Middleware to verify JWT tokens
+const authenticateToken = (req, res, next) => {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+
+    if (!token) return res.status(401).json({error: 'Access denied'});
+
+    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+        if (err) return res.status(403).json({error: 'Invalid token'});
+        req.userId = user.userId; // Attach user ID to the request object
+        next();
+    });
+};
+
+module.exports = authenticateToken;

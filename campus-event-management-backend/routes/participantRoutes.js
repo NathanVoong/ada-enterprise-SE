@@ -1,7 +1,10 @@
 const express = require('express');
-const { registerParticipant } = require('../controllers/participantController');
+const {registerForEvent} = require('../controllers/participantController');
+const authenticateToken = require('../utils/authMiddleware');
+
 const router = express.Router();
 
-router.post('/', registerParticipant);
+// Register for an event
+router.post('/register', authenticateToken, registerForEvent);
 
 module.exports = router;
