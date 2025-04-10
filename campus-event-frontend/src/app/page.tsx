@@ -1,8 +1,5 @@
-"use client";
-
-import React from "react";
 import axios from "axios";
-import EventList from "../../components/event-card/EventCard";
+import EventList from "../components/event-card/EventCard";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -16,12 +13,12 @@ const getAllEvents = async () => {
     }
 };
 
-export default async function EventsPage() {
+export default async function HomePage() {
     const events = await getAllEvents();
 
     return (
         <div>
-            <h1>All Events</h1>
+            <h1>Upcoming Events</h1>
             <EventList events={events} />
         </div>
     );
