@@ -3,20 +3,21 @@ dotenv.config();
 
 import express from "express";
 import sequelize from "./database.js";
+import models from "./models/index.js"; // Import the centralized models
 import userRoutes from "./routes/userRoutes.js";
 import eventRoutes from "./routes/eventRoutes.js";
 import registrationRoutes from "./routes/registrationRoutes.js";
 
 const app = express();
-const PORT = process.env.PORT || 5001; // Use port 5001 to avoid conflicts
+const PORT = process.env.PORT || 5001;
 
 // Middleware
 app.use(express.json());
 
 // Routes
-app.use("/api/users", userRoutes); // User-related endpoints
-app.use("/api/events", eventRoutes); // Event-related endpoints
-app.use("/api/registrations", registrationRoutes); // Registration-related endpoints
+app.use("/api/users", userRoutes);
+app.use("/api/events", eventRoutes);
+app.use("/api/registrations", registrationRoutes);
 
 // Start the server and connect to the database
 sequelize.sync({ force: false }).then(() => {

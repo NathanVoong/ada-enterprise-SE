@@ -1,26 +1,21 @@
 import { DataTypes } from "sequelize";
-import sequelize from "../database.js";
 
-const Registration = sequelize.define("Registration", {
-    uuid: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
-        primaryKey: true,
-    },
-    userId: {
-        type: DataTypes.UUID,
-        references: {
-            model: "Users",
-            key: "uuid",
+const Registration = (sequelize) => {
+    return sequelize.define("Registration", {
+        uuid: {
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
+            primaryKey: true,
         },
-    },
-    eventId: {
-        type: DataTypes.UUID,
-        references: {
-            model: "Events",
-            key: "uuid",
+        userId: {
+            type: DataTypes.UUID,
+            allowNull: false,
         },
-    },
-});
+        eventId: {
+            type: DataTypes.UUID,
+            allowNull: false,
+        },
+    });
+};
 
 export default Registration;
