@@ -13,7 +13,7 @@ export default function LoginPage() {
     const router = useRouter();
     const { setIsLoggedIn, setUser } = React.useContext(AuthContext);
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         try {

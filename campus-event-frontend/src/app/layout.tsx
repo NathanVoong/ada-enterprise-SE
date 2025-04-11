@@ -1,7 +1,7 @@
-import type { Metadata } from "next";
+import type {Metadata} from "next";
 import "./globals.css";
 import Navbar from "../components/navbar/Navbar";
-import { AuthProvider } from "@/context/AuthContext";
+import {AuthProvider} from "@/context/AuthContext";
 
 export const metadata: Metadata = {
     title: "Campus Event Management",
@@ -17,7 +17,7 @@ export default function RootLayout({
         <html lang="en">
         <body>
         <AuthProvider>
-            <Navbar />
+            <Navbar/>
             {children}
         </AuthProvider>
         </body>

@@ -4,11 +4,17 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "@/context/AuthContext";
 
+interface User {
+    uuid: string;
+    name: string;
+    email: string;
+}
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function ProfilePage() {
     const { isLoggedIn, user } = useContext(AuthContext);
-    const [userData, setUserData] = useState(null); // State to store fetched user data
+    const [userData, setUserData] = useState<User | null>(null); // State to store fetched user data
     const [loading, setLoading] = useState(true); // Loading state for API call
 
     useEffect(() => {
@@ -20,8 +26,8 @@ export default function ProfilePage() {
 
             try {
                 // Fetch user details from the backend using the user's UUID
-                const response = await axios.get(`${API_URL}/users/${user.uuid}`);
-                setUserData(response.data);
+                const response = await axios.get<{ data: User }>(`${API_URL}/users/${user.uuid}`);
+                setUserData(response.data.data); // Extract the 'data' property from the response
             } catch (error) {
                 console.error("Error fetching user data:", error);
             } finally {

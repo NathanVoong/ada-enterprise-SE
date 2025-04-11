@@ -1,13 +1,8 @@
 import axios from "axios";
 import EventList from "../../components/event-card/EventCard";
 import Link from "next/link";
-import styles from "./page.module.css";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
-interface SearchParams {
-    userId?: string; // Optional since it may not always be provided
-}
 
 const getAllEvents = async () => {
     try {
@@ -19,24 +14,23 @@ const getAllEvents = async () => {
     }
 };
 
-export default async function EventsPage({ searchParams }: { searchParams: SearchParams }) {
+export default async function EventsPage({ searchParams }: { searchParams: Promise<{ userId?: string }> }) {
     const events = await getAllEvents();
-    const userId = searchParams.userId; // Extract user ID from query parameters
+    const resolvedSearchParams = await searchParams; // Resolve the Promise
+    const userId = resolvedSearchParams.userId; // Extract user ID from query parameters
 
     return (
-        <div className={styles.events}>
+        <div>
             <h1>All Events</h1>
             {userId ? (
                 <Link href={`/create-event?userId=${userId}`}>
-                    <button className={styles.createEventButton}>Create Event</button>
+                    <button>Create Event</button>
                 </Link>
             ) : (
                 <p>You must be logged in to create an event.</p>
             )}
             {events.length > 0 ? (
-                <div className={styles.eventList}>
-                    <EventList events={events} />
-                </div>
+                <EventList events={events} />
             ) : (
                 <p>No events available.</p>
             )}
