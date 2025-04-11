@@ -18,7 +18,7 @@ export default function CreateEventPage() {
         location: "",
     });
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         try {

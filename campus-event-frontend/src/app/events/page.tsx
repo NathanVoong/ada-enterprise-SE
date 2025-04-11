@@ -5,6 +5,10 @@ import styles from "./page.module.css";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
+interface SearchParams {
+    userId?: string; // Optional since it may not always be provided
+}
+
 const getAllEvents = async () => {
     try {
         const response = await axios.get(`${API_URL}/events`);
@@ -15,7 +19,7 @@ const getAllEvents = async () => {
     }
 };
 
-export default async function EventsPage({ searchParams }) {
+export default async function EventsPage({ searchParams }: { searchParams: SearchParams }) {
     const events = await getAllEvents();
     const userId = searchParams.userId; // Extract user ID from query parameters
 
