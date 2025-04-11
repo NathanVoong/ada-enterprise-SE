@@ -1,0 +1,50 @@
+.events {
+    padding: 20px;
+}
+
+.createEventButton {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.createEventButton:hover {
+    background-color: #0056b3;
+}
+
+.eventList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.eventCard {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    text-align: center;
+}
+
+.eventTitle {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.eventDescription {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.eventDate {
+    font-size: 0.9rem;
+    color: #888;
+}

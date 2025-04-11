@@ -1,39 +1,42 @@
-/* General Navbar Styles */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: #333; /* Dark background for contrast */
+    background-color: #333;
     color: white;
 }
 
-/* Left Section */
 .leftSection {
     display: flex;
-    gap: 20px; /* Spacing between links */
+    gap: 20px;
 }
 
-/* Right Section */
 .rightSection {
     display: flex;
-    gap: 20px; /* Spacing between links */
+    gap: 20px;
 }
 
-/* Links */
 .link {
-    text-decoration: none;
     color: white;
-    font-size: 16px;
-    font-weight: bold;
-    transition: color 0.3s ease; /* Smooth hover effect */
+    text-decoration: none;
+    font-size: 1rem;
 }
 
 .link:hover {
-    color: #00bcd4; /* Cyan blue on hover */
+    text-decoration: underline;
 }
 
-/* Active Link (Optional) */
-.link.active {
-    color: #00bcd4; /* Highlight active link */
+.logoutButton {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.logoutButton:hover {
+    background-color: #cc0000;
 }
