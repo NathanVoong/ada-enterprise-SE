@@ -6,7 +6,12 @@ import styles from "./Navbar.module.css"; // Import CSS Module
 import { AuthContext } from "@/context/AuthContext";
 
 const Navbar = () => {
-    const { isLoggedIn } = useContext(AuthContext);
+    const { isLoggedIn, setIsLoggedIn, setUser } = useContext(AuthContext);
+
+    const handleLogout = () => {
+        setIsLoggedIn(false);
+        setUser(null); // Clear user data
+    };
 
     return (
         <nav className={styles.navbar}>
@@ -23,9 +28,14 @@ const Navbar = () => {
             {/* Right Section */}
             <div className={styles.rightSection}>
                 {isLoggedIn ? (
-                    <Link href="/profile" className={styles.link}>
-                        Profile
-                    </Link>
+                    <>
+                        <Link href="/profile" className={styles.link}>
+                            Profile
+                        </Link>
+                        <button onClick={handleLogout} className={styles.link}>
+                            Logout
+                        </button>
+                    </>
                 ) : (
                     <>
                         <Link href="/login" className={styles.link}>

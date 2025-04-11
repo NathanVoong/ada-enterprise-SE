@@ -37,4 +37,31 @@ router.get("/", async (req, res) => {
     }
 });
 
+// Login a user
+router.post("/login", async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        // Find users matching the email
+        const users = await models.User.findAll({ where: { email } });
+
+        // Check if any user was found and validate the password
+        if (users.length === 0 || users[0].password !== password) {
+            return res.status(401).json({ message: "Invalid credentials" });
+        }
+
+        // Extract the first user (since email should be unique)
+        const user = users[0];
+
+        // Return user data (excluding sensitive fields like password)
+        res.status(200).json({
+            uuid: user.uuid,
+            name: user.name,
+            email: user.email,
+        });
+    } catch (err) {
+        res.status(500).json({ message: "Error logging in", error: err.message });
+    }
+});
+
 export default router;
