@@ -27,9 +27,6 @@ const Event = (sequelize) => {
             type: DataTypes.UUID,
             allowNull: false,
         },
-        imageUrl: {
-            type: DataTypes.STRING,
-        },
     });
 };
 

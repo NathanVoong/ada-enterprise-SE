@@ -16,7 +16,6 @@ export default function CreateEventPage() {
         description: "",
         date: "",
         location: "",
-        imageUrl: "",
     });
 
     const handleSubmit = async (event) => {
@@ -89,18 +88,6 @@ export default function CreateEventPage() {
                         value={formData.location}
                         onChange={(e) =>
                             setFormData({ ...formData, location: e.target.value })
-                        }
-                        required
-                    />
-                </label>
-                <br />
-                <label>
-                    Image URL:
-                    <input
-                        type="url"
-                        value={formData.imageUrl}
-                        onChange={(e) =>
-                            setFormData({ ...formData, imageUrl: e.target.value })
                         }
                         required
                     />

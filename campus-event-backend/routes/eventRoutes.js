@@ -6,7 +6,7 @@ const router = express.Router();
 // Create a new event
 router.post("/", async (req, res) => {
     try {
-        const { title, description, date, location, organizerId, imageUrl } = req.body;
+        const { title, description, date, location, organizerId } = req.body;
 
         // Validate organizerId
         const organizer = await models.User.findByPk(organizerId);
@@ -20,7 +20,6 @@ router.post("/", async (req, res) => {
             date,
             location,
             organizerId,
-            imageUrl,
         });
         res.status(201).json(newEvent);
     } catch (err) {
