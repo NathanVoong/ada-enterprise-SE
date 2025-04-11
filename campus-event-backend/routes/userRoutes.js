@@ -64,4 +64,28 @@ router.post("/login", async (req, res) => {
     }
 });
 
+// Get a single user by UUID
+router.get("/:uuid", async (req, res) => {
+    try {
+        const { uuid } = req.params;
+
+        // Find the user by UUID
+        const users = await models.User.findAll({ where: { uuid } });
+
+        if (!users) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        const user = users[0];
+        // Return user data (excluding sensitive fields like password)
+        res.status(200).json({
+            uuid: user.uuid,
+            name: user.name,
+            email: user.email,
+        });
+    } catch (err) {
+        res.status(500).json({ message: "Error fetching user", error: err.message });
+    }
+});
+
 export default router;
