@@ -1,53 +1,39 @@
-/* Navbar.module.css */
+/* General Navbar Styles */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: #f0f0f0;
-    border-bottom: 1px solid #ccc;
-}
-
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.searchBarContainer {
-    flex-grow: 1;
-    margin: 0 20px;
-}
-
-.searchForm {
-    display: flex;
-    align-items: center;
-}
-
-.searchInput {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 100%;
-}
-
-.searchButton {
-    margin-left: 10px;
-    padding: 8px 12px;
-    background-color: #007bff;
+    background-color: #333; /* Dark background for contrast */
     color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
 }
 
+/* Left Section */
+.leftSection {
+    display: flex;
+    gap: 20px; /* Spacing between links */
+}
+
+/* Right Section */
 .rightSection {
     display: flex;
-    align-items: center;
+    gap: 20px; /* Spacing between links */
 }
 
-.profileIcon {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    object-fit: cover;
+/* Links */
+.link {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    transition: color 0.3s ease; /* Smooth hover effect */
+}
+
+.link:hover {
+    color: #00bcd4; /* Cyan blue on hover */
+}
+
+/* Active Link (Optional) */
+.link.active {
+    color: #00bcd4; /* Highlight active link */
 }

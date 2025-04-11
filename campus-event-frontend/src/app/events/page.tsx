@@ -1,6 +1,3 @@
-"use client";
-
-import React from "react";
 import axios from "axios";
 import EventList from "../../components/event-card/EventCard";
 
@@ -22,7 +19,11 @@ export default async function EventsPage() {
     return (
         <div>
             <h1>All Events</h1>
-            <EventList events={events} />
+            {events.length > 0 ? (
+                <EventList events={events} />
+            ) : (
+                <p>No events available.</p>
+            )}
         </div>
     );
 }
